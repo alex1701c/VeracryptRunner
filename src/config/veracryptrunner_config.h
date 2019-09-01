@@ -27,7 +27,7 @@ public Q_SLOTS:
 
     void defaults() override;
 
-    void addVeracryptItem(const VeracryptVolume &volume);
+    void addVeracryptItem(const VeracryptVolume &volume = VeracryptVolume());
 
 private:
     VeracryptRunnerConfigForm *m_ui;

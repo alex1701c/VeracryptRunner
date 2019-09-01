@@ -13,7 +13,7 @@ class VeracryptVolume {
 
 public :
 
-    VolumeType type;
+    QString type;
     QString source;
     QString mountPath;
     QStringList keyFiles;

@@ -37,7 +37,19 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
-       <layout class="QVBoxLayout" name="veracryptVolumes"/>
+       <layout class="QVBoxLayout" name="veracryptVolumes">
+        <item>
+         <layout class="QVBoxLayout" name="buttonsLayout">
+          <item alignment="Qt::AlignTop">
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Add new config</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
