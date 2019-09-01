@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KCModule
+X-KDE-Library=kcm_krunner_veracryptrunner
+X-KDE-ParentComponents=veracryptrunner
+X-KDE-PluginKeyword=kcm_krunner_veracryptrunner
+
+Name=veracryptrunner
