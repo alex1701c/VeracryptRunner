@@ -2,6 +2,7 @@
 #define VeracryptRunnerCONFIG_H
 
 #include "ui_veracryptrunner_config.h"
+#include "ui_veracryptrunner_config_item.h"
 #include <KCModule>
 #include <KConfigCore/KConfigGroup>
 #include <VeracryptVolume.h>
@@ -11,6 +12,13 @@ Q_OBJECT
 
 public:
     explicit VeracryptRunnerConfigForm(QWidget *parent);
+};
+
+class VeracryptConfigItem : public QWidget, public Ui::VeracryptItemUi {
+Q_OBJECT
+
+public:
+    explicit VeracryptConfigItem(QWidget *parent);
 };
 
 class VeracryptRunnerConfig : public KCModule {

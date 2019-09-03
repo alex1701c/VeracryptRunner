@@ -10,6 +10,7 @@ set(kcm_krunner_veracryptrunner_SRCS
         VeracryptVolume.h)
 
 ki18n_wrap_ui(kcm_krunner_veracryptrunner_SRCS config/veracryptrunner_config.ui)
+ki18n_wrap_ui(kcm_krunner_veracryptrunner_SRCS config/veracryptrunner_config_item.ui)
 add_library(kcm_krunner_veracryptrunner MODULE ${kcm_krunner_veracryptrunner_SRCS})
 target_link_libraries(kcm_krunner_veracryptrunner
         Qt5::Core

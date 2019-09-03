@@ -12,6 +12,10 @@ VeracryptRunnerConfigForm::VeracryptRunnerConfigForm(QWidget *parent) : QWidget(
     setupUi(this);
 }
 
+VeracryptConfigItem::VeracryptConfigItem(QWidget *parent) {
+    setupUi(this);
+}
+
 VeracryptRunnerConfig::VeracryptRunnerConfig(QWidget *parent, const QVariantList &args) : KCModule(parent, args) {
     m_ui = new VeracryptRunnerConfigForm(this);
     auto *layout = new QGridLayout(this);
@@ -39,21 +43,11 @@ void VeracryptRunnerConfig::defaults() {
 }
 
 void VeracryptRunnerConfig::addVeracryptItem(const VeracryptVolume &volume) {
-    auto *box = new QGroupBox();
-    box->setTitle(!volume.source.isEmpty() ? volume.source : "New Volume");
-    auto *itemLayout = new QVBoxLayout(box);
-
-    // Buttons to select the type of volume
-    auto *typeRadioButtons = new QGroupBox();
-    auto *fileOption = new QRadioButton("File", typeRadioButtons);
-    auto *deviceOption = new QRadioButton("Device", typeRadioButtons);
-    if(volume.type == "DEVICE") deviceOption->setChecked(true); else fileOption->setChecked(true);
-    itemLayout->addWidget(fileOption);
-    itemLayout->addWidget(deviceOption);
-
-
-    m_ui->veracryptVolumes->addWidget(box);
+    Q_UNUSED(volume)
+    auto *item = new VeracryptConfigItem(this);
+    m_ui->veracryptVolumes->addWidget(item);
 }
 
 
 #include "veracryptrunner_config.moc"
+

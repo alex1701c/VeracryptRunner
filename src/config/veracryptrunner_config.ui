@@ -19,39 +19,41 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="parentLayout">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
+    <widget class="QScrollArea" name="scrollArea">
      <property name="minimumSize">
       <size>
-       <width>0</width>
-       <height>0</height>
+       <width>400</width>
+       <height>400</height>
       </size>
      </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
-     <property name="title">
-      <string>VeracryptRunner Config</string>
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <layout class="QVBoxLayout" name="veracryptVolumes">
-        <item>
-         <layout class="QVBoxLayout" name="buttonsLayout">
-          <item alignment="Qt::AlignTop">
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>Add new config</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>653</width>
+        <height>564</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item alignment="Qt::AlignTop">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>Add Config</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="veracryptVolumes"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
