@@ -21,9 +21,16 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>GroupBox</string>
+      <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="nameLineEdit">
+        <property name="placeholderText">
+         <string>Change Name</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QRadioButton" name="fileRadioButton">
         <property name="text">
@@ -86,7 +93,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QListView" name="keyFileListView">
+          <widget class="QListWidget" name="keyFileListWidget">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -104,14 +111,14 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QPushButton" name="addKeyFile">
+            <widget class="QPushButton" name="addKeyFileButton">
              <property name="text">
               <string>Add Key File</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="removeKeyFile">
+            <widget class="QPushButton" name="removeKeyFileButton">
              <property name="text">
               <string>Remove Key File</string>
              </property>
@@ -125,7 +132,7 @@
       <item>
        <widget class="QLabel" name="passIntegrationLabel">
         <property name="text">
-         <string>Path for Pass Integration (optional password storage):</string>
+         <string>Path For Pass Integration (optional):</string>
         </property>
        </widget>
       </item>

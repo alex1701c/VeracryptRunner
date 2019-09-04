@@ -18,6 +18,21 @@ public:
 public Q_SLOTS:
 
     void toggleVolumeSource();
+
+    void openVolumeFilePicker();
+
+    // TODO Implement better solution
+    void openVolumeDevicePicker();
+
+    void openMountPathPicker();
+
+    void validateKeyFileControls();
+
+    void openKeyFilePicker();
+
+    void removeKeyFile();
+
+
 };
 
 #endif
