@@ -6,6 +6,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 
+
 K_PLUGIN_FACTORY(VeracryptRunnerConfigFactory, registerPlugin<VeracryptRunnerConfig>("kcm_krunner_veracryptrunner");)
 
 VeracryptRunnerConfigForm::VeracryptRunnerConfigForm(QWidget *parent) : QWidget(parent) {
@@ -30,6 +31,7 @@ void VeracryptRunnerConfig::load() {
 
 void VeracryptRunnerConfig::save() {
     qInfo() << "Save Config";
+    manager.saveVeracryptVolumes(volumeUiElements);
     emit changed();
 }
 

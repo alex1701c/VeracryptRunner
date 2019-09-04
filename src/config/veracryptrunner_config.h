@@ -1,11 +1,14 @@
 #ifndef VeracryptRunnerCONFIG_H
 #define VeracryptRunnerCONFIG_H
 
+#define CONFIG_DIALOG_MODULE
+
 #include "VeracryptConfigItem.h"
 #include "ui_veracryptrunner_config.h"
 #include <KCModule>
 #include <KConfigCore/KConfigGroup>
 #include <VeracryptVolume.h>
+#include <VeracryptVolumeManager.h>
 
 class VeracryptRunnerConfigForm : public QWidget, public Ui::VeracryptRunnerConfigUi {
 Q_OBJECT
@@ -19,6 +22,8 @@ Q_OBJECT
 
 public:
     explicit VeracryptRunnerConfig(QWidget *parent = nullptr, const QVariantList &args = QVariantList());
+
+    VeracryptVolumeManager manager;
 
 public Q_SLOTS:
 

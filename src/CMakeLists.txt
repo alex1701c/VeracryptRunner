@@ -1,13 +1,13 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_runner_org.kde.veracryptrunner\")
 
-set(veracryptrunner_SRCS veracryptrunner.cpp VeracryptVolume.h)
+set(veracryptrunner_SRCS veracryptrunner.cpp VeracryptVolume.h VeracryptVolumeManager.h)
 
 add_library(krunner_veracryptrunner MODULE ${veracryptrunner_SRCS})
 target_link_libraries(krunner_veracryptrunner KF5::Runner KF5::I18n)
 
 set(kcm_krunner_veracryptrunner_SRCS
         config/veracryptrunner_config.cpp
-        VeracryptVolume.h config/VeracryptConfigItem.cpp config/VeracryptConfigItem.h)
+        VeracryptVolume.h config/VeracryptConfigItem.cpp config/VeracryptConfigItem.h VeracryptVolumeManager.h)
 
 ki18n_wrap_ui(kcm_krunner_veracryptrunner_SRCS config/veracryptrunner_config.ui)
 ki18n_wrap_ui(kcm_krunner_veracryptrunner_SRCS config/veracryptrunner_config_item.ui)

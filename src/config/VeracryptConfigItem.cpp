@@ -3,8 +3,9 @@
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Save Config
  * TODO Load Config
+ * TODO Add button to delete config
+ * TODO Automatically enumerate New Volumes
  */
 VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volume) : QWidget(parent) {
     setupUi(this);
@@ -38,7 +39,7 @@ void VeracryptConfigItem::toggleVolumeSource() {
 }
 
 void VeracryptConfigItem::initializeValues() {
-    this->nameLineEdit->setText(volume->name.isEmpty() ? "New Volume " : volume->name);
+    this->nameLineEdit->setText(volume->name.isEmpty() ? "New Volume" : volume->name);
     // Initialize type and source
     bool fileType = this->volume->type == "FILE";
     if (fileType) {
