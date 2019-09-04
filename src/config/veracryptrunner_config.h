@@ -19,6 +19,10 @@ Q_OBJECT
 
 public:
     explicit VeracryptConfigItem(QWidget *parent);
+
+public Q_SLOTS:
+
+    void toggleVolumeSource();
 };
 
 class VeracryptRunnerConfig : public KCModule {

@@ -29,12 +29,8 @@
         <property name="text">
          <string>File</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="filePushButton">
-        <property name="text">
-         <string>Select File</string>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -42,6 +38,13 @@
        <widget class="QRadioButton" name="deviceRadioButton">
         <property name="text">
          <string>Device</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="filePushButton">
+        <property name="text">
+         <string>Select File</string>
         </property>
        </widget>
       </item>
@@ -57,12 +60,22 @@
         <item>
          <widget class="QLabel" name="mountPathLabel">
           <property name="text">
-           <string>Mount Path:</string>
+           <string>Mount Path: </string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="mountPath"/>
+         <widget class="QPushButton" name="mountPath">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Select Location</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -75,7 +88,7 @@
          <item>
           <widget class="QListView" name="keyFileListView">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -83,7 +96,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>1</height>
+             <height>0</height>
             </size>
            </property>
           </widget>
