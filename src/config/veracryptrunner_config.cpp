@@ -24,7 +24,8 @@ VeracryptRunnerConfig::VeracryptRunnerConfig(QWidget *parent, const QVariantList
 }
 
 void VeracryptRunnerConfig::load() {
-    KCModule::load();
+    const auto volumes = manager.getVeracryptVolumes();
+    for (auto &volume:manager.getVeracryptVolumes()) addVeracryptItem(&volume);
     emit changed(false);
 }
 

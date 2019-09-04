@@ -6,12 +6,15 @@
  * TODO Load Config
  * TODO Add button to delete config
  * TODO Automatically enumerate New Volumes
+ * TODO Show options in runner
+ * TODO Build CLI command with volume options
  */
 VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volume) : QWidget(parent) {
     setupUi(this);
     this->volume = volume;
     initializeValues();
-
+    // General Signals
+    connect(this->nameLineEdit, SIGNAL(textChanged(QString)), parent, SLOT(changed()));
     // Connect type signals
     connect(this->fileRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
     connect(this->deviceRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
@@ -56,6 +59,10 @@ void VeracryptConfigItem::initializeValues() {
         this->keyFileListWidget->addItem(keyFile);
     }
     validateKeyFileControls();
+
+    // Location and Pass paths
+    this->mountPath->setText(volume->mountPath);
+    this->passIntegration->setText(volume->passPath);
 }
 
 void VeracryptConfigItem::openVolumeFilePicker() {

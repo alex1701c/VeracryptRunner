@@ -1,6 +1,7 @@
 #ifndef VERACRYPTRUNNER_VERACRYPTVOLUMEMANAGER_H
 #define VERACRYPTRUNNER_VERACRYPTVOLUMEMANAGER_H
 
+#include <QDebug>
 #include <KSharedConfig>
 #include "VeracryptVolume.h"
 
@@ -13,7 +14,19 @@ public:
     }
 
     QList<VeracryptVolume> getVeracryptVolumes() {
-        return {};
+        QList<VeracryptVolume> volumes;
+        for (const auto &volumeName:config.groupList()) {
+            VeracryptVolume volume;
+            KConfigGroup volumeConfig = config.group(volumeName);
+            volume.name = volumeName;
+            volume.type = volumeConfig.readEntry("type");
+            volume.source = volumeConfig.readEntry("source");
+            volume.mountPath = volumeConfig.readEntry("mountPath");
+            volume.keyFiles = volumeConfig.readEntry("keyFiles").split(";", QString::SplitBehavior::SkipEmptyParts);
+            volume.passPath = volumeConfig.readEntry("passPath");
+            volumes.append(volume);
+        }
+        return volumes;
     }
 
 #ifdef CONFIG_DIALOG_MODULE
