@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# TODO Enable if the project is on Github
 if [[ $(basename "$PWD") != "VeracryptRunner"* ]];then
-    #git clone https://github.com/%{USERNAME}/VeracryptRunner
-    #cd VeracryptRunner/
+    git clone https://github.com/alex1701c/VeracryptRunner
+    cd VeracryptRunner/
     echo "Please go to the project folder"
     exit
 fi
