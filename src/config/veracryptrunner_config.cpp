@@ -12,21 +12,6 @@ VeracryptRunnerConfigForm::VeracryptRunnerConfigForm(QWidget *parent) : QWidget(
     setupUi(this);
 }
 
-VeracryptConfigItem::VeracryptConfigItem(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-    this->keyFileListView->setHidden(true);
-    toggleVolumeSource();
-
-    // Connect Signals
-    connect(this->fileRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
-    connect(this->deviceRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
-}
-
-void VeracryptConfigItem::toggleVolumeSource() {
-    bool fileSource = this->fileRadioButton->isChecked();
-    this->filePushButton->setHidden(!fileSource);
-    this->devicePushButton->setHidden(fileSource);
-}
 
 VeracryptRunnerConfig::VeracryptRunnerConfig(QWidget *parent, const QVariantList &args) : KCModule(parent, args) {
     m_ui = new VeracryptRunnerConfigForm(this);
@@ -44,9 +29,7 @@ void VeracryptRunnerConfig::load() {
 
 
 void VeracryptRunnerConfig::save() {
-
-    KCModule::save();
-
+    qInfo() << "Save Config";
     emit changed();
 }
 
@@ -54,10 +37,10 @@ void VeracryptRunnerConfig::defaults() {
     emit changed(true);
 }
 
-void VeracryptRunnerConfig::addVeracryptItem(const VeracryptVolume &volume) {
-    Q_UNUSED(volume)
-    auto *item = new VeracryptConfigItem(this);
-    m_ui->veracryptVolumes->addWidget(item);
+void VeracryptRunnerConfig::addVeracryptItem(VeracryptVolume *volume) {
+    auto *element = new VeracryptConfigItem(this, volume);
+    m_ui->veracryptVolumes->addWidget(element);
+    volumeUiElements.append(element);
 }
 
 

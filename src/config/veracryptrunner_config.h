@@ -1,8 +1,8 @@
 #ifndef VeracryptRunnerCONFIG_H
 #define VeracryptRunnerCONFIG_H
 
+#include "VeracryptConfigItem.h"
 #include "ui_veracryptrunner_config.h"
-#include "ui_veracryptrunner_config_item.h"
 #include <KCModule>
 #include <KConfigCore/KConfigGroup>
 #include <VeracryptVolume.h>
@@ -12,17 +12,6 @@ Q_OBJECT
 
 public:
     explicit VeracryptRunnerConfigForm(QWidget *parent);
-};
-
-class VeracryptConfigItem : public QWidget, public Ui::VeracryptItemUi {
-Q_OBJECT
-
-public:
-    explicit VeracryptConfigItem(QWidget *parent);
-
-public Q_SLOTS:
-
-    void toggleVolumeSource();
 };
 
 class VeracryptRunnerConfig : public KCModule {
@@ -39,10 +28,11 @@ public Q_SLOTS:
 
     void defaults() override;
 
-    void addVeracryptItem(const VeracryptVolume &volume = VeracryptVolume());
+    void addVeracryptItem(VeracryptVolume *volume = new VeracryptVolume());
 
 private:
     VeracryptRunnerConfigForm *m_ui;
+    QList<VeracryptConfigItem *> volumeUiElements;
 
 };
 

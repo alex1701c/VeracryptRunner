@@ -7,7 +7,7 @@ target_link_libraries(krunner_veracryptrunner KF5::Runner KF5::I18n)
 
 set(kcm_krunner_veracryptrunner_SRCS
         config/veracryptrunner_config.cpp
-        VeracryptVolume.h)
+        VeracryptVolume.h config/VeracryptConfigItem.cpp config/VeracryptConfigItem.h)
 
 ki18n_wrap_ui(kcm_krunner_veracryptrunner_SRCS config/veracryptrunner_config.ui)
 ki18n_wrap_ui(kcm_krunner_veracryptrunner_SRCS config/veracryptrunner_config_item.ui)
