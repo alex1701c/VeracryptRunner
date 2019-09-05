@@ -1,11 +1,10 @@
 #include <QtWidgets/QFileDialog>
 #include <QDebug>
+#include <QtWidgets/QMessageBox>
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Load Config
- * TODO Add button to delete config
- * TODO Automatically enumerate New Volumes
+ * TODO Automatically enumerate New Volumes and give Configs ID
  * TODO Show options in runner
  * TODO Build CLI command with volume options
  */
@@ -15,6 +14,10 @@ VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volum
     initializeValues();
     // General Signals
     connect(this->nameLineEdit, SIGNAL(textChanged(QString)), parent, SLOT(changed()));
+    // Delete Signals
+    connect(this->deleteConfigButton, SIGNAL(clicked(bool)), this, SLOT(deleteConfig()));
+    connect(this->deleteConfigButton, SIGNAL(clicked(bool)), parent, SLOT(changed()));
+    connect(this, SIGNAL(confirmedDelete()), parent, SLOT(confirmedDeleteOfItem()));
     // Connect type signals
     connect(this->fileRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
     connect(this->deviceRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
@@ -98,5 +101,13 @@ void VeracryptConfigItem::validateKeyFileControls() {
     const bool empty = this->keyFileListWidget->model()->rowCount() == 0;
     this->keyFileListWidget->setHidden(empty);
     this->removeKeyFileButton->setDisabled(empty || this->keyFileListWidget->currentIndex().row() == -1);
+}
+
+void VeracryptConfigItem::deleteConfig() {
+    auto res = QMessageBox::question(this, "Delete Entry ?", "Do You Want To Delete This Entry ?", QMessageBox::Yes | QMessageBox::No);
+    if (res == QMessageBox::Yes) {
+        // Deletes Widget and remove it from list in parent
+        emit confirmedDelete();
+    }
 }
 

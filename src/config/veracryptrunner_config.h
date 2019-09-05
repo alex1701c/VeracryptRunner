@@ -35,6 +35,8 @@ public Q_SLOTS:
 
     void addVeracryptItem(VeracryptVolume *volume = new VeracryptVolume());
 
+    void confirmedDeleteOfItem();
+
 private:
     VeracryptRunnerConfigForm *m_ui;
     QList<VeracryptConfigItem *> volumeUiElements;

@@ -25,11 +25,27 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLineEdit" name="nameLineEdit">
-        <property name="placeholderText">
-         <string>Change Name</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLineEdit" name="nameLineEdit">
+          <property name="placeholderText">
+           <string>Change Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteConfigButton">
+          <property name="text">
+           <string>Delete Config</string>
+          </property>
+          <property name="icon">
+           <iconset theme="delete">
+            <normaloff/>
+           </iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QRadioButton" name="fileRadioButton">

@@ -46,6 +46,13 @@ void VeracryptRunnerConfig::addVeracryptItem(VeracryptVolume *volume) {
     volumeUiElements.append(element);
 }
 
+void VeracryptRunnerConfig::confirmedDeleteOfItem() {
+    auto *item = dynamic_cast<VeracryptConfigItem *>(this->sender());
+    volumeUiElements.removeAt(volumeUiElements.indexOf(item));
+    m_ui->veracryptVolumes->removeWidget(item);
+    item->deleteLater();
+}
+
 
 #include "veracryptrunner_config.moc"
 
