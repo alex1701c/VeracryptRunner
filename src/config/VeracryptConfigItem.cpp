@@ -4,7 +4,7 @@
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Automatically enumerate New Volumes and give Configs ID
+ * TODO Sort configs and insert at beginning
  * TODO Show options in runner
  * TODO Build CLI command with volume options
  */
@@ -45,7 +45,9 @@ void VeracryptConfigItem::toggleVolumeSource() {
 }
 
 void VeracryptConfigItem::initializeValues() {
-    this->nameLineEdit->setText(volume->name.isEmpty() ? "New Volume" : volume->name);
+    this->nameLineEdit->setText(volume->name.isEmpty() ? "New Volume " + QString::number(volume->id) : volume->name);
+    this->idLabel->setText(QString::number(volume->id));
+    this->idLabel->hide();
     // Initialize type and source
     bool fileType = this->volume->type == "FILE";
     if (fileType) {
@@ -64,7 +66,7 @@ void VeracryptConfigItem::initializeValues() {
     validateKeyFileControls();
 
     // Location and Pass paths
-    this->mountPath->setText(volume->mountPath);
+    this->mountPath->setText(volume->mountPath.isEmpty() ? "/media/veracrypt" + QString::number(volume->id) : volume->mountPath);
     this->passIntegration->setText(volume->passPath);
 }
 
@@ -79,8 +81,8 @@ void VeracryptConfigItem::openVolumeDevicePicker() {
 }
 
 void VeracryptConfigItem::openMountPathPicker() {
-    QString mountPath = QFileDialog::getExistingDirectory(this, tr("Select Mount Directory"),
-                                                          QDir::homePath(), QFileDialog::ShowDirsOnly);
+    QString mountPath = QFileDialog::getExistingDirectory(this, tr("Select Mount Directory"), this->mountPath->text(),
+                                                          QFileDialog::ShowDirsOnly);
     if (!mountPath.isEmpty()) this->mountPath->setText(mountPath);
 }
 

@@ -48,6 +48,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="idLabel">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QRadioButton" name="fileRadioButton">
         <property name="text">
          <string>File</string>

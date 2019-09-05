@@ -41,6 +41,10 @@ void VeracryptRunnerConfig::defaults() {
 }
 
 void VeracryptRunnerConfig::addVeracryptItem(VeracryptVolume *volume) {
+    if (volume->id == -1) {
+        volume->id = manager.config.group("General").readEntry("id", "1").toInt();
+        manager.config.group("General").writeEntry("id", volume->id + 1);
+    }
     auto *element = new VeracryptConfigItem(this, volume);
     m_ui->veracryptVolumes->addWidget(element);
     volumeUiElements.append(element);

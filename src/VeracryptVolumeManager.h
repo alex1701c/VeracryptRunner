@@ -6,19 +6,20 @@
 #include "VeracryptVolume.h"
 
 class VeracryptVolumeManager {
+public:
     KConfigGroup config;
 
-public:
     VeracryptVolumeManager() {
         this->config = KSharedConfig::openConfig("krunnerrc")->group("Runners").group("VeracryptRunner");
     }
 
     QList<VeracryptVolume> getVeracryptVolumes() {
         QList<VeracryptVolume> volumes;
-        for (const auto &volumeName:config.groupList()) {
+        for (const auto &volumeName:config.groupList().filter(QRegExp(R"(^(?!General$).*$)"))) {
             VeracryptVolume volume;
             KConfigGroup volumeConfig = config.group(volumeName);
             volume.name = volumeName;
+            volume.id = volumeConfig.readEntry("id").toInt();
             volume.type = volumeConfig.readEntry("type");
             volume.source = volumeConfig.readEntry("source");
             volume.mountPath = volumeConfig.readEntry("mountPath");
@@ -34,9 +35,12 @@ public:
 #include "config/VeracryptConfigItem.h"
 
     void saveVeracryptVolumes(const QList<VeracryptConfigItem *> &configItems) {
-        config.deleteGroup();
+        for (const auto &volumeGroupName:config.groupList().filter(QRegExp(R"(^(?!General$).*$)"))) {
+            config.group(volumeGroupName).deleteGroup();
+        }
         for (const auto *item:configItems) {
             auto group = config.group(item->nameLineEdit->text());
+            group.writeEntry("id", item->idLabel->text());
             group.writeEntry("type", item->fileRadioButton->isChecked() ? "FILE" : "DEVICE");
             group.writeEntry("source",
                              item->fileRadioButton->isChecked() ? item->filePushButton->text() : item->devicePushButton->text()

@@ -12,6 +12,7 @@ enum VolumeType {
 class VeracryptVolume {
 
 public :
+    int id = -1;
     QString name;
     QString type;
     QString source;
