@@ -19,148 +19,208 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string/>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+    <widget class="QGroupBox" name="horizontalGroupBox">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLineEdit" name="nameLineEdit">
-          <property name="placeholderText">
-           <string>Change Name</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="deleteConfigButton">
-          <property name="text">
-           <string>Delete Config</string>
-          </property>
-          <property name="icon">
-           <iconset theme="delete">
-            <normaloff/>
-           </iconset>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="verticalLayout_4"/>
       </item>
       <item>
-       <widget class="QLabel" name="idLabel">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="fileRadioButton">
-        <property name="text">
-         <string>File</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="deviceRadioButton">
-        <property name="text">
-         <string>Device</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="filePushButton">
-        <property name="text">
-         <string>Select File</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="devicePushButton">
-        <property name="text">
-         <string>Select Device</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="mountPathLabel">
-          <property name="text">
-           <string>Mount Path: </string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="mountPath">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Select Location</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="keyFiles">
-        <property name="title">
-         <string>Key Files</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+       <widget class="QFrame" name="frame">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QListWidget" name="keyFileListWidget">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QPushButton" name="addKeyFileButton">
-             <property name="text">
-              <string>Add Key File</string>
+            <widget class="QLineEdit" name="nameLineEdit">
+             <property name="placeholderText">
+              <string>Change Name</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="removeKeyFileButton">
+            <widget class="QPushButton" name="deleteConfigButton">
              <property name="text">
-              <string>Remove Key File</string>
+              <string>Delete Config</string>
+             </property>
+             <property name="icon">
+              <iconset theme="delete">
+               <normaloff/>
+              </iconset>
              </property>
             </widget>
            </item>
           </layout>
          </item>
+         <item>
+          <widget class="QLabel" name="idLabel">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="fileRadioButton">
+           <property name="text">
+            <string>File</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="deviceRadioButton">
+           <property name="text">
+            <string>Device</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="filePushButton">
+           <property name="text">
+            <string>Select File</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="devicePushButton">
+           <property name="text">
+            <string>Select Device</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="mountPathLabel">
+             <property name="text">
+              <string>Mount Path: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="mountPath">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Select Location</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="keyFiles">
+           <property name="title">
+            <string>Key Files</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QListWidget" name="keyFileListWidget">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QPushButton" name="addKeyFileButton">
+                <property name="text">
+                 <string>Add Key File</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="removeKeyFileButton">
+                <property name="text">
+                 <string>Remove Key File</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="passIntegrationLabel">
+           <property name="text">
+            <string>Path For Pass Integration (optional):</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="passIntegration"/>
+         </item>
         </layout>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="passIntegrationLabel">
-        <property name="text">
-         <string>Path For Pass Integration (optional):</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="passIntegration"/>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item alignment="Qt::AlignBottom">
+         <widget class="QPushButton" name="moveUp">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="arrow-up">
+            <normaloff/>
+           </iconset>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignTop">
+         <widget class="QPushButton" name="moveDown">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="arrow-down">
+            <normaloff/>
+           </iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

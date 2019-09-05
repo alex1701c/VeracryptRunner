@@ -5,6 +5,7 @@
 
 /*
  * TODO Sort configs and insert at beginning
+ * TODO Picker for pass paths
  * TODO Show options in runner
  * TODO Build CLI command with volume options
  */
@@ -18,6 +19,12 @@ VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volum
     connect(this->deleteConfigButton, SIGNAL(clicked(bool)), this, SLOT(deleteConfig()));
     connect(this->deleteConfigButton, SIGNAL(clicked(bool)), parent, SLOT(changed()));
     connect(this, SIGNAL(confirmedDelete()), parent, SLOT(confirmedDeleteOfItem()));
+    connect(this, SIGNAL(confirmedDelete()), parent, SLOT(validateMoveButtons()));
+    // Connect move up/down signals to parent
+    connect(this->moveUp, SIGNAL(clicked(bool)), parent, SLOT(moveItemUp()));
+    connect(this->moveUp, SIGNAL(clicked(bool)), parent, SLOT(changed()));
+    connect(this->moveDown, SIGNAL(clicked(bool)), parent, SLOT(moveItemDown()));
+    connect(this->moveDown, SIGNAL(clicked(bool)), parent, SLOT(changed()));
     // Connect type signals
     connect(this->fileRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
     connect(this->deviceRadioButton, SIGNAL(clicked(bool)), this, SLOT(toggleVolumeSource()));
@@ -112,4 +119,3 @@ void VeracryptConfigItem::deleteConfig() {
         emit confirmedDelete();
     }
 }
-

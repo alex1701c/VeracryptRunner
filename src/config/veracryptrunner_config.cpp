@@ -25,7 +25,8 @@ VeracryptRunnerConfig::VeracryptRunnerConfig(QWidget *parent, const QVariantList
 
 void VeracryptRunnerConfig::load() {
     const auto volumes = manager.getVeracryptVolumes();
-    for (auto &volume:manager.getVeracryptVolumes()) addVeracryptItem(&volume);
+    for (auto &volume:manager.getVeracryptVolumes()) addVeracryptItem(&volume, false);
+    validateMoveButtons();
     emit changed(false);
 }
 
@@ -40,14 +41,15 @@ void VeracryptRunnerConfig::defaults() {
     emit changed(true);
 }
 
-void VeracryptRunnerConfig::addVeracryptItem(VeracryptVolume *volume) {
+void VeracryptRunnerConfig::addVeracryptItem(VeracryptVolume *volume, bool validate) {
     if (volume->id == -1) {
         volume->id = manager.config.group("General").readEntry("id", "1").toInt();
         manager.config.group("General").writeEntry("id", volume->id + 1);
     }
     auto *element = new VeracryptConfigItem(this, volume);
-    m_ui->veracryptVolumes->addWidget(element);
-    volumeUiElements.append(element);
+    m_ui->veracryptVolumes->insertWidget(0, element);
+    volumeUiElements.push_front(element);
+    if (validate) validateMoveButtons();
 }
 
 void VeracryptRunnerConfig::confirmedDeleteOfItem() {
@@ -55,6 +57,31 @@ void VeracryptRunnerConfig::confirmedDeleteOfItem() {
     volumeUiElements.removeAt(volumeUiElements.indexOf(item));
     m_ui->veracryptVolumes->removeWidget(item);
     item->deleteLater();
+}
+
+void VeracryptRunnerConfig::moveItemUp() {
+    const auto item = reinterpret_cast<VeracryptConfigItem *>(sender()->parent()->parent());
+    const int idx = m_ui->veracryptVolumes->indexOf(item);
+    m_ui->veracryptVolumes->removeWidget(item);
+    m_ui->veracryptVolumes->insertWidget(idx - 1, item);
+    validateMoveButtons();
+}
+
+void VeracryptRunnerConfig::moveItemDown() {
+    const auto item = reinterpret_cast<VeracryptConfigItem *>(sender()->parent()->parent());
+    const int idx = m_ui->veracryptVolumes->indexOf(item);
+    m_ui->veracryptVolumes->removeWidget(item);
+    m_ui->veracryptVolumes->insertWidget(idx + 1, item);
+    validateMoveButtons();
+}
+
+void VeracryptRunnerConfig::validateMoveButtons() {
+    const int itemCount = m_ui->veracryptVolumes->count();
+    for (int i = 0; i < itemCount; ++i) {
+        const auto *item = reinterpret_cast<VeracryptConfigItem *>( m_ui->veracryptVolumes->itemAt(i)->widget());
+        item->moveUp->setDisabled(i == 0);
+        item->moveDown->setDisabled(i == itemCount - 1);
+    }
 }
 
 

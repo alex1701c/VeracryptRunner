@@ -1,5 +1,4 @@
 #include "ui_veracryptrunner_config_item.h"
-//#include "veracryptrunner_config.h"
 #include <KConfigCore/KConfigGroup>
 #include <VeracryptVolume.h>
 
@@ -39,8 +38,6 @@ public:
 Q_SIGNALS:
 
     void confirmedDelete();
-
-
 };
 
 #endif

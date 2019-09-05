@@ -33,9 +33,15 @@ public Q_SLOTS:
 
     void defaults() override;
 
-    void addVeracryptItem(VeracryptVolume *volume = new VeracryptVolume());
+    void addVeracryptItem(VeracryptVolume *volume = new VeracryptVolume(), bool validate=true);
 
     void confirmedDeleteOfItem();
+
+    void moveItemUp();
+
+    void moveItemDown();
+
+    void validateMoveButtons();
 
 private:
     VeracryptRunnerConfigForm *m_ui;
