@@ -1,11 +1,14 @@
 #include <QtWidgets/QFileDialog>
 #include <QDebug>
 #include <QtWidgets/QMessageBox>
+#include <QtCore/QStorageInfo>
+#include <QtCore/QProcess>
+#include <QtWidgets/QInputDialog>
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Sort configs and insert at beginning
- * TODO Picker for pass paths
+ * TODO Better solution for picker
+ * TODO Hidden volumes option
  * TODO Show options in runner
  * TODO Build CLI command with volume options
  */
@@ -43,6 +46,10 @@ VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volum
     connect(this->addKeyFileButton, SIGNAL(clicked(bool)), parent, SLOT(changed()));
     connect(this->removeKeyFileButton, SIGNAL(clicked(bool)), this, SLOT(removeKeyFile()));
     connect(this->removeKeyFileButton, SIGNAL(clicked(bool)), parent, SLOT(changed()));
+    // Signals for pass integration
+    connect(this->passIntegration, SIGNAL(textChanged(QString)), parent, SLOT(changed()));
+    connect(this->passIntegrationSelectButton, SIGNAL(clicked(bool)), this, SLOT(passFilePicker()));
+    connect(this->passIntegrationSelectButton, SIGNAL(clicked(bool)), parent, SLOT(changed()));
 }
 
 void VeracryptConfigItem::toggleVolumeSource() {
@@ -62,8 +69,8 @@ void VeracryptConfigItem::initializeValues() {
     } else {
         this->devicePushButton->setText(volume->source.isEmpty() ? "Select Device" : volume->source);
     }
-    this->filePushButton->setChecked(fileType);
-    this->devicePushButton->setChecked(!fileType);
+    this->fileRadioButton->setChecked(fileType);
+    this->deviceRadioButton->setChecked(!fileType);
     toggleVolumeSource();
 
     // Initialize Key Files
@@ -83,8 +90,17 @@ void VeracryptConfigItem::openVolumeFilePicker() {
 }
 
 void VeracryptConfigItem::openVolumeDevicePicker() {
-    QString devicePath = QFileDialog::getOpenFileName(this, tr("Select Device"), "/dev", tr("Veracrypt Devices (sd*)"));
-    if (!devicePath.isEmpty()) this->devicePushButton->setText(devicePath);
+    QProcess process;
+    process.start("lsblk", QStringList() << "-o" << "NAME,LABEL,SIZE,MOUNTPOINT");
+    process.waitForFinished(-1);
+    QStringList devices = QString(process.readAllStandardOutput()).split("\n", QString::SkipEmptyParts)
+            .filter(QRegExp(R"(.*sd.*)"));
+    auto deviceInfo = QInputDialog::getItem(this, "Select Device", "Name Label Size Mount Point", devices);
+    if (!deviceInfo.isEmpty()) {
+        QRegExp deviceRegex(R"((sd[a-z]\d*))");
+        deviceRegex.indexIn(deviceInfo);
+        this->devicePushButton->setText("/dev/" + deviceRegex.capturedTexts().at(1));
+    }
 }
 
 void VeracryptConfigItem::openMountPathPicker() {
@@ -117,5 +133,16 @@ void VeracryptConfigItem::deleteConfig() {
     if (res == QMessageBox::Yes) {
         // Deletes Widget and remove it from list in parent
         emit confirmedDelete();
+    }
+}
+
+void VeracryptConfigItem::passFilePicker() {
+    QString passPath = QFileDialog::getOpenFileName(this, tr("Select Pass File"), QDir::homePath() + "/.password-store",
+                                                    tr("Pass File (*.gpg)"));
+    if (!passPath.isEmpty()) {
+        QRegExp passRegex(R"(^.*/\.password-store/(.*)\.gpg$)");
+        passRegex.indexIn(passPath);
+        const QString res = passRegex.capturedTexts().at(1);
+        if (!res.isEmpty()) this->passIntegration->setText(res);
     }
 }

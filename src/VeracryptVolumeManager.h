@@ -20,6 +20,7 @@ public:
             KConfigGroup volumeConfig = config.group(volumeName);
             volume.name = volumeName;
             volume.id = volumeConfig.readEntry("id").toInt();
+            volume.priority = volumeConfig.readEntry("priority").toInt();
             volume.type = volumeConfig.readEntry("type");
             volume.source = volumeConfig.readEntry("source");
             volume.mountPath = volumeConfig.readEntry("mountPath");
@@ -38,9 +39,11 @@ public:
         for (const auto &volumeGroupName:config.groupList().filter(QRegExp(R"(^(?!General$).*$)"))) {
             config.group(volumeGroupName).deleteGroup();
         }
-        for (const auto *item:configItems) {
+        for (auto *item:configItems) {
             auto group = config.group(item->nameLineEdit->text());
             group.writeEntry("id", item->idLabel->text());
+            group.writeEntry("priority", 100 - configItems.indexOf(item));
+            //qInfo() << "Save: " << item->nameLineEdit->text() << configItems.indexOf(item);
             group.writeEntry("type", item->fileRadioButton->isChecked() ? "FILE" : "DEVICE");
             group.writeEntry("source",
                              item->fileRadioButton->isChecked() ? item->filePushButton->text() : item->devicePushButton->text()

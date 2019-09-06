@@ -24,8 +24,14 @@ VeracryptRunnerConfig::VeracryptRunnerConfig(QWidget *parent, const QVariantList
 }
 
 void VeracryptRunnerConfig::load() {
-    const auto volumes = manager.getVeracryptVolumes();
-    for (auto &volume:manager.getVeracryptVolumes()) addVeracryptItem(&volume, false);
+    auto volumes = manager.getVeracryptVolumes();
+    std::sort(volumes.begin(), volumes.end(), [](VeracryptVolume &volume1, VeracryptVolume &volume2) -> bool {
+        return volume1.priority < volume2.priority;
+    });
+    for (auto &volume:volumes) {
+        //qInfo() << "Load: " << volume.name << volume.priority;
+        addVeracryptItem(&volume, false);
+    }
     validateMoveButtons();
     emit changed(false);
 }
@@ -33,7 +39,12 @@ void VeracryptRunnerConfig::load() {
 
 void VeracryptRunnerConfig::save() {
     qInfo() << "Save Config";
-    manager.saveVeracryptVolumes(volumeUiElements);
+    QList<VeracryptConfigItem *> configItemsUi;
+    const int itemCount = m_ui->veracryptVolumes->count();
+    for (int i = 0; i < itemCount; ++i) {
+        configItemsUi.append(reinterpret_cast<VeracryptConfigItem *>( m_ui->veracryptVolumes->itemAt(i)->widget()));
+    }
+    manager.saveVeracryptVolumes(configItemsUi);
     emit changed();
 }
 
@@ -48,13 +59,11 @@ void VeracryptRunnerConfig::addVeracryptItem(VeracryptVolume *volume, bool valid
     }
     auto *element = new VeracryptConfigItem(this, volume);
     m_ui->veracryptVolumes->insertWidget(0, element);
-    volumeUiElements.push_front(element);
     if (validate) validateMoveButtons();
 }
 
 void VeracryptRunnerConfig::confirmedDeleteOfItem() {
     auto *item = dynamic_cast<VeracryptConfigItem *>(this->sender());
-    volumeUiElements.removeAt(volumeUiElements.indexOf(item));
     m_ui->veracryptVolumes->removeWidget(item);
     item->deleteLater();
 }

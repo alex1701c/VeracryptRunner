@@ -34,6 +34,8 @@ public Q_SLOTS:
 
     void deleteConfig();
 
+    void passFilePicker();
+
 public:
 Q_SIGNALS:
 

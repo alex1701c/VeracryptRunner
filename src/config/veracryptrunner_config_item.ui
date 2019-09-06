@@ -163,7 +163,18 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="passIntegration"/>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLineEdit" name="passIntegration"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="passIntegrationSelectButton">
+             <property name="text">
+              <string>Select Path</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>

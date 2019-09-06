@@ -45,8 +45,6 @@ public Q_SLOTS:
 
 private:
     VeracryptRunnerConfigForm *m_ui;
-    QList<VeracryptConfigItem *> volumeUiElements;
-
 };
 
 #endif
