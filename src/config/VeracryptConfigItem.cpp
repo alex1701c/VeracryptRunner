@@ -7,8 +7,9 @@
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Show options in runner
- * TODO Build CLI command with volume options
+ * TODO Focus when sorting entries
+ * TODO Run method not blocking for runner
+ * TODO Validation for config entries
  */
 VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volume) : QWidget(parent) {
     setupUi(this);

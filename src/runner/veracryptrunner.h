@@ -13,7 +13,7 @@ public:
 
     ~VeracryptRunner() override;
 
-    Plasma::QueryMatch createMatch(const VeracryptVolume &volume, const QString &query);
+    Plasma::QueryMatch createMatch(const VeracryptVolume &volume);
 
     VeracryptVolumeManager manager;
     QList<VeracryptVolume> volumes;
