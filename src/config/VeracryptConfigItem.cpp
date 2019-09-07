@@ -7,8 +7,6 @@
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Better solution for picker
- * TODO Hidden volumes option
  * TODO Show options in runner
  * TODO Build CLI command with volume options
  */

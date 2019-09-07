@@ -7,18 +7,33 @@ VeracryptRunner::VeracryptRunner(QObject *parent, const QVariantList &args)
     setObjectName(QStringLiteral("VeracryptRunner"));
 }
 
-VeracryptRunner::~VeracryptRunner() {
+VeracryptRunner::~VeracryptRunner() = default;
+
+
+void VeracryptRunner::reloadConfiguration() {
+    volumes = manager.getVeracryptVolumes();
 }
 
-
 void VeracryptRunner::match(Plasma::RunnerContext &context) {
+    if (!context.isValid()) return;
     const QString term = context.query();
+    if (!term.startsWith("veracryp")) return;
+
+    QRegExp regExp(R"(veracrypt?(?: (.*))?)");
+    regExp.indexIn(term);
+    const QString volumeQuery = regExp.capturedTexts().at(1);
+    qInfo() << volumeQuery;
     QList<Plasma::QueryMatch> matches;
-    Plasma::QueryMatch match(this);
-    match.setIconName("kdeapp");
-    match.setText("Hello World!");
-    matches.append(match);
+
+    // TODO
+
     context.addMatches(matches);
+}
+
+Plasma::QueryMatch VeracryptRunner::createMatch(const VeracryptVolume &volume, const QString &query) {
+    Q_UNUSED(volume)
+    Q_UNUSED(query)
+    return Plasma::QueryMatch();
 }
 
 void VeracryptRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) {
