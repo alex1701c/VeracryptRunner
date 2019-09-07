@@ -73,6 +73,7 @@ void VeracryptRunnerConfig::moveItemUp() {
     const int idx = m_ui->veracryptVolumes->indexOf(item);
     m_ui->veracryptVolumes->removeWidget(item);
     m_ui->veracryptVolumes->insertWidget(idx - 1, item);
+    m_ui->scrollArea->ensureWidgetVisible(m_ui->veracryptVolumes->itemAt(idx)->widget());
     validateMoveButtons();
 }
 
@@ -82,6 +83,7 @@ void VeracryptRunnerConfig::moveItemDown() {
     m_ui->veracryptVolumes->removeWidget(item);
     m_ui->veracryptVolumes->insertWidget(idx + 1, item);
     validateMoveButtons();
+    m_ui->scrollArea->ensureWidgetVisible(m_ui->veracryptVolumes->itemAt(idx)->widget());
 }
 
 void VeracryptRunnerConfig::validateMoveButtons() {
