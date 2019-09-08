@@ -1,17 +1,16 @@
-*This plugin is still in the early stages of development and has currently no backend functionality*
-
 # Veracrypt Runner
-This plugin allows you to easily mount/unmount configured Veracrypt volumes.
+This plugin allows you to easily mount/unmount configured Veracrypt volumes.  
+Additionally it provides pass integration.
 
 ### Required Dependencies  
 Debian/Ubuntu:  
-`sudo apt install cmake extra-cmake-modules buildMountCommand-essential libkf5runner-dev libkf5textwidgets-dev qtdeclarative5-dev gettext`
+`sudo apt install cmake extra-cmake-modules buildMountCommand-essential libkf5runner-dev libkf5textwidgets-dev qtdeclarative5-dev gettext xdotool`
 
 openSUSE  
-`sudo zypper install cmake extra-cmake-modules libQt5Widgets5 libQt5Core5 libqt5-qtlocation-devel ki18n-devel ktextwidgets-devel kservice-devel krunner-devel gettext-tools`  
+`sudo zypper install cmake extra-cmake-modules libQt5Widgets5 libQt5Core5 libqt5-qtlocation-devel ki18n-devel ktextwidgets-devel kservice-devel krunner-devel gettext-tools xdotool`  
 
 Fedora  
-`sudo dnf install cmake extra-cmake-modules kf5-ki18n-devel kf5-kservice-devel kf5-krunner-devel kf5-ktextwidgets-devel gettext`  
+`sudo dnf install cmake extra-cmake-modules kf5-ki18n-devel kf5-kservice-devel kf5-krunner-devel kf5-ktextwidgets-devel gettext xdotool`  
 
 ### Build instructions  
 
