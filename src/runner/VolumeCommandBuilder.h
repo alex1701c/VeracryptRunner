@@ -6,13 +6,16 @@
 
 class VolumeCommandBuilder {
 public:
-    static void build(const VeracryptVolume &volume) {
-        QProcess veracryptProcess;
+    static void buildUnmountCommand(const VeracryptVolume &volume) {
+        QProcess::startDetached("veracrypt", QStringList() << "-d" << volume.source);
+    }
+
+    static void buildMountCommand(const VeracryptVolume &volume) {
         QStringList options;
         options.append("--keyfiles");
-        options.append(volume.keyFiles.join(",").remove("&"));
-        options.append(QString(volume.source).remove("&"));
-        options.append(QString(volume.mountPath).remove("&"));
+        options.append(volume.keyFiles.join(","));
+        options.append(volume.source);
+        options.append(volume.mountPath);
 
         QProcess::startDetached("veracrypt", options);
 
@@ -26,7 +29,7 @@ public:
                 QString password = passResults.split('\n', QString::SkipEmptyParts).at(0);
                 if (!password.isEmpty()) {
                     QProcess windowIdProcess;
-                    QStringList idOptions({"-name", "Enter password for \"" + QString(volume.source).remove("&") + "\""});
+                    QStringList idOptions({"-name", "Enter password for \"" + volume.source + "\""});
                     windowIdProcess.start("xwininfo", idOptions);
                     windowIdProcess.waitForFinished(-1);
                     QString windowIdRes = windowIdProcess.readAll();

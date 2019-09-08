@@ -22,9 +22,10 @@ public:
             volume.id = volumeConfig.readEntry("id").toInt();
             volume.priority = volumeConfig.readEntry("priority").toInt();
             volume.type = volumeConfig.readEntry("type");
-            volume.source = volumeConfig.readEntry("source");
-            volume.mountPath = volumeConfig.readEntry("mountPath");
-            volume.keyFiles = volumeConfig.readEntry("keyFiles").split(";", QString::SplitBehavior::SkipEmptyParts);
+            volume.source = volumeConfig.readEntry("source").remove('&');
+            volume.mountPath = volumeConfig.readEntry("mountPath").remove('&');
+            volume.keyFiles = volumeConfig.readEntry("keyFiles").remove('&')
+                    .split(";", QString::SplitBehavior::SkipEmptyParts);
             volume.passPath = volumeConfig.readEntry("passPath");
             volumes.append(volume);
         }

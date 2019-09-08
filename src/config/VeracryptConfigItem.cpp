@@ -7,8 +7,6 @@
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Unmount volumes
- * TODO Run method not blocking for runner
  * TODO Validation for config entries
  */
 VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volume) : QWidget(parent) {

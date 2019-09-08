@@ -5,7 +5,7 @@ This plugin allows you to easily mount/unmount configured Veracrypt volumes.
 
 ### Required Dependencies  
 Debian/Ubuntu:  
-`sudo apt install cmake extra-cmake-modules build-essential libkf5runner-dev libkf5textwidgets-dev qtdeclarative5-dev gettext`
+`sudo apt install cmake extra-cmake-modules buildMountCommand-essential libkf5runner-dev libkf5textwidgets-dev qtdeclarative5-dev gettext`
 
 openSUSE  
 `sudo zypper install cmake extra-cmake-modules libQt5Widgets5 libQt5Core5 libqt5-qtlocation-devel ki18n-devel ktextwidgets-devel kservice-devel krunner-devel gettext-tools`  

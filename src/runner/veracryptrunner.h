@@ -13,18 +13,24 @@ public:
 
     ~VeracryptRunner() override;
 
-    Plasma::QueryMatch createMatch(const VeracryptVolume &volume);
+    Plasma::QueryMatch createMatch(const VeracryptVolume &volume, bool unmount = false);
 
     VeracryptVolumeManager manager;
     QList<VeracryptVolume> volumes;
+    QStringList mountedVolumes;
 
 public: // Plasma::AbstractRunner API
-
-    void reloadConfiguration() override;
-
     void match(Plasma::RunnerContext &context) override;
 
     void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
+
+    void reloadConfiguration() override;
+
+public Q_SLOTS:
+
+    void init() override;
+
+    void prepareForMatchSession();
 };
 
 #endif
