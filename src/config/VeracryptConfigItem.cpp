@@ -7,7 +7,7 @@
 #include "VeracryptConfigItem.h"
 
 /*
- * TODO Focus when sorting entries
+ * TODO Unmount volumes
  * TODO Run method not blocking for runner
  * TODO Validation for config entries
  */

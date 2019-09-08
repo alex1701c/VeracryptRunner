@@ -5,7 +5,6 @@
 #include <VeracryptVolume.h>
 
 class VolumeCommandBuilder {
-
 public:
     static void build(const VeracryptVolume &volume) {
         QProcess veracryptProcess;
@@ -22,8 +21,21 @@ public:
             QProcess passProcess;
             passProcess.start("pass", QStringList() << "show" << volume.passPath);
             passProcess.waitForFinished(-1);
-            QString password = QString(passProcess.readAll()).split('\n', QString::SkipEmptyParts).at(0);
-            QProcess::startDetached("xdotool", QStringList() << "type" << password);
+            const QString passResults = passProcess.readAll();
+            if (!passResults.isEmpty()) {
+                QString password = passResults.split('\n', QString::SkipEmptyParts).at(0);
+                if (!password.isEmpty()) {
+                    QProcess windowIdProcess;
+                    QStringList idOptions({"-name", "Enter password for \"" + QString(volume.source).remove("&") + "\""});
+                    windowIdProcess.start("xwininfo", idOptions);
+                    windowIdProcess.waitForFinished(-1);
+                    QString windowIdRes = windowIdProcess.readAll();
+                    if (windowIdRes.contains("Window id: ")) {
+                        const auto id = windowIdRes.split("Window id: ").at(1).split(" ").at(0);
+                        QProcess::startDetached("xdotool", QStringList() << "type" << "--window" << id << password);
+                    }
+                }
+            }
         }
     }
 };
