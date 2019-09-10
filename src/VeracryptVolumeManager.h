@@ -22,9 +22,9 @@ public:
             volume.id = volumeConfig.readEntry("id").toInt();
             volume.priority = volumeConfig.readEntry("priority").toInt();
             volume.type = volumeConfig.readEntry("type");
-            volume.source = volumeConfig.readEntry("source").remove('&');
-            volume.mountPath = volumeConfig.readEntry("mountPath").remove('&');
-            volume.keyFiles = volumeConfig.readEntry("keyFiles").remove('&')
+            volume.source = volumeConfig.readEntry("source");
+            volume.mountPath = volumeConfig.readEntry("mountPath");
+            volume.keyFiles = volumeConfig.readEntry("keyFiles")
                     .split(";", QString::SplitBehavior::SkipEmptyParts);
             volume.passPath = volumeConfig.readEntry("passPath");
             volumes.append(volume);
@@ -37,6 +37,7 @@ public:
 #include "config/VeracryptConfigItem.h"
 
     void saveVeracryptVolumes(const QList<VeracryptConfigItem *> &configItems) {
+        qInfo() << "Save Volumes" << configItems.count();
         for (const auto &volumeGroupName:config.groupList().filter(QRegExp(R"(^(?!General$).*$)"))) {
             config.group(volumeGroupName).deleteGroup();
         }
@@ -46,10 +47,9 @@ public:
             group.writeEntry("priority", 100 - configItems.indexOf(item));
             //qInfo() << "Save: " << item->nameLineEdit->text() << configItems.indexOf(item);
             group.writeEntry("type", item->fileRadioButton->isChecked() ? "FILE" : "DEVICE");
-            group.writeEntry("source",
-                             item->fileRadioButton->isChecked() ? item->filePushButton->text() : item->devicePushButton->text()
-            );
-            group.writeEntry("mountPath", item->mountPath->text());
+            group.writeEntry("source", item->fileRadioButton->isChecked() ? item->filePushButton->text().remove('&') :
+                                       item->devicePushButton->text().remove('&'));
+            group.writeEntry("mountPath", item->mountPath->text().remove('&'));
             QString keyFilesString;
             int count = item->keyFileListWidget->model()->rowCount();
             for (int i = 0; i < count; ++i) keyFilesString.append(item->keyFileListWidget->item(i)->text() + ";");
