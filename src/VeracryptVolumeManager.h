@@ -37,7 +37,6 @@ public:
 #include "config/VeracryptConfigItem.h"
 
     void saveVeracryptVolumes(const QList<VeracryptConfigItem *> &configItems) {
-        qInfo() << "Save Volumes" << configItems.count();
         for (const auto &volumeGroupName:config.groupList().filter(QRegExp(R"(^(?!General$).*$)"))) {
             config.group(volumeGroupName).deleteGroup();
         }
@@ -45,7 +44,6 @@ public:
             auto group = config.group(item->nameLineEdit->text());
             group.writeEntry("id", item->idLabel->text());
             group.writeEntry("priority", 100 - configItems.indexOf(item));
-            //qInfo() << "Save: " << item->nameLineEdit->text() << configItems.indexOf(item);
             group.writeEntry("type", item->fileRadioButton->isChecked() ? "FILE" : "DEVICE");
             group.writeEntry("source", item->fileRadioButton->isChecked() ? item->filePushButton->text().remove('&') :
                                        item->devicePushButton->text().remove('&'));

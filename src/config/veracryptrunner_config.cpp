@@ -29,7 +29,6 @@ void VeracryptRunnerConfig::load() {
         return volume1.priority < volume2.priority;
     });
     for (auto &volume:volumes) {
-        //qInfo() << "Load: " << volume.name << volume.priority;
         addVeracryptItem(&volume, false);
     }
     validateMoveButtons();
@@ -38,7 +37,6 @@ void VeracryptRunnerConfig::load() {
 
 
 void VeracryptRunnerConfig::save() {
-    qInfo() << "Save Config";
     QList<VeracryptConfigItem *> configItemsUi;
     const int itemCount = m_ui->veracryptVolumes->count();
     for (int i = 0; i < itemCount; ++i) {

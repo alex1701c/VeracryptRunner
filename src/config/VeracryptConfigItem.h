@@ -21,7 +21,6 @@ public Q_SLOTS:
 
     void openVolumeFilePicker();
 
-    // TODO Implement better solution
     void openVolumeDevicePicker();
 
     void openMountPathPicker();
