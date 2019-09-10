@@ -6,9 +6,6 @@
 #include <QtWidgets/QInputDialog>
 #include "VeracryptConfigItem.h"
 
-/*
- * TODO Validation for config entries
- */
 VeracryptConfigItem::VeracryptConfigItem(QWidget *parent, VeracryptVolume *volume) : QWidget(parent) {
     setupUi(this);
     this->volume = volume;
