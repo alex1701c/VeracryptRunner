@@ -2,6 +2,9 @@
 This Krunner plugin allows you to easily mount/unmount configured Veracrypt volumes.  
 Additionally it provides pass integration.
 
+*Info: This plugin has been rewritten and now uses the KRunner DBus API and has some more optimizations,
+please go to https://github.com/alex1701c/krunner-veracryptrunner/ for details*
+
 ### Required Dependencies  
 Debian/Ubuntu:  
 `sudo apt install cmake extra-cmake-modules build-essential libkf5runner-dev libkf5textwidgets-dev qtdeclarative5-dev gettext xdotool wmctrl`
@@ -23,7 +26,7 @@ git clone https://github.com/alex1701c/VeracryptRunner
 cd VeracryptRunner
 mkdir build
 cd build
-cmake -DQT_PLUGIN_INSTALL_DIR=`kf5-config --qt-plugins` ..
+cmake -DQT_PLUGIN_INSTALL_DIR=`kf5-config --qt-plugins` -DCMAKE_BUILD_TYPE=Release  ..
 make
 sudo make install
 kquitapp5 krunner 2> /dev/null; kstart5 --windowclass krunner krunner > /dev/null 2>&1 &
